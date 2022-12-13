@@ -245,4 +245,11 @@ ul.tagcloud .badge {
   color: white;
 }
 
+ul.tagcloud-list {
+}
+
+ul.tagcloud-list .badge {
+  background-color: black;
+  color: white;
+}
 

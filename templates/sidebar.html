@@ -4,6 +4,7 @@
   <h4>Pages</h4>
 
   <ul>
+  <ul class="blank">
     {% for title, link in MENUITEMS %}
     <li><a href="{{ link }}">{{ title }}</a></li>
     {% endfor %}
@@ -11,6 +12,7 @@
     {% for p in pages %}
     <li {% if p==page %} class="active" {% endif %}><a href="{{ SITEURL }}/{{ p.url }}">{{ p.title }}</a></li>
     {% endfor %}
+  </ul>
   </ul>
   {% endif %}
   
@@ -29,10 +31,12 @@
 {% if SOCIAL %}
 <nav class="widget">
   <h4>Social</h4>
+  <ul>
   <ul class="blank">
-  {% for name, url in SOCIAL %}
-    <li><a href="{{ url|e }}">{{ name }}</a></li>
+  {% for name, url, icon in SOCIAL_ENTRIES %}
+    <li><a href="{{ url|e }}"><li class="social-{{ name }}"><i class="fa {{ icon }}"></i> {{ name }}</a></li>
   {% endfor %}
+  </ul>
   </ul>
 </nav>
 {% endif %}
@@ -42,7 +46,7 @@
 {% if tag_cloud %}
 <a href="{{ SITEURL }}/{{ TAGS_URL }}"><h4>Tags</h4></a>
 <ul class="tagcloud">
-  {% for tag in tag_cloud %}
+  {% for tag in tag_cloud|sort(attribute='0') %}
   <li class="tag-{{ tag.1 }}"> <a href="{{ SITEURL }}/{{ tag.0.url }}">{{ tag.0 }}
       {% if TAG_CLOUD_BADGE %}
         <span class="badge">{{ tag.2 }}</span>
